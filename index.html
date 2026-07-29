@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balaji Veeraplendra — Writer / Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0f0d0b;
+    --bg-vignette: #050403;
+    --paper: #ece5d3;
+    --paper-dim: #d9d0b8;
+    --ink: #1b1712;
+    --gold: #c8992c;
+    --gold-dim: #8a6a1f;
+    --red: #7e2a24;
+    --muted: #8a8272;
+    --rule: rgba(27,23,18,0.18);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Courier Prime', monospace;
+  }
+
+  body{
+    background:
+      radial-gradient(ellipse at 50% -10%, #221c14 0%, var(--bg) 55%, var(--bg-vignette) 100%);
+    min-height: 100vh;
+  }
+
+  /* Sprocket rails */
+  .rail{
+    position: fixed;
+    top:0; bottom:0;
+    width: 34px;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent 0 18px, rgba(200,153,44,0.10) 18px 20px);
+    z-index: 0;
+    pointer-events:none;
+  }
+  .rail.left{ left:0; }
+  .rail.right{ right:0; }
+  .rail::before, .rail::after{
+    content:"";
+    position:absolute; left:50%; transform:translateX(-50%);
+    top:14px; width:12px; height:12px; border-radius:2px;
+    background: var(--bg-vignette);
+    box-shadow: 0 24px 0 0 var(--bg-vignette), 0 48px 0 0 var(--bg-vignette);
+  }
+  .rail{
+    background-color: #16110c;
+  }
+  .sprockets{
+    position:fixed; top:0; bottom:0; width:34px;
+    background-repeat: repeat-y;
+    background-image: repeating-linear-gradient(to bottom,
+      transparent 0px, transparent 10px,
+      #0a0806 10px, #0a0806 26px);
+    -webkit-mask-image: repeating-linear-gradient(to bottom, black 0 14px, transparent 14px 32px);
+            mask-image: repeating-linear-gradient(to bottom, black 0 14px, transparent 14px 32px);
+    z-index:1;
+  }
+
+  .frame{
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 48px 120px;
+  }
+
+  /* ---- Title card ---- */
+  .headshot{
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 0 6px rgba(200,153,44,0.08);
+    margin-bottom: 26px;
+  }
+
+  .titlecard{
+    padding: 90px 0 56px;
+    text-align:center;
+    border-bottom: 1px solid rgba(200,153,44,0.35);
+  }
+  .eyebrow{
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .title{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 9vw, 84px);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: var(--paper);
+    margin: 0;
+    text-shadow: 0 0 40px rgba(200,153,44,0.15);
+  }
+  .role-line{
+    margin-top: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .role-line span{ color: var(--gold); }
+  .logline{
+    max-width: 480px;
+    margin: 28px auto 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--paper-dim);
+    font-style: italic;
+  }
+  .contact-strip{
+    margin-top: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+  .contact-strip a{ color: var(--gold); text-decoration: none; }
+  .contact-strip a:hover{ text-decoration: underline; }
+  .contact-strip .sep{ color: var(--gold-dim); margin: 0 10px; }
+
+  /* ---- Scene heading (signature element) ---- */
+  .scene{
+    margin-top: 64px;
+  }
+  .slug{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 26px;
+  }
+  .slug .num{
+    color: var(--gold-dim);
+    font-size: 12px;
+  }
+  .slug .tag{
+    color: var(--red);
+    background: rgba(126,42,36,0.12);
+    border: 1px solid rgba(126,42,36,0.35);
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-size: 11px;
+  }
+
+  .body-text{
+    color: var(--paper-dim);
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+
+  /* ---- Skills ---- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 28px;
+  }
+  .skill-item{
+    display:flex; align-items:center; gap:10px;
+    font-size: 14px;
+    color: var(--paper);
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .skill-item::before{
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink:0;
+  }
+
+  /* ---- Filmography / experience ---- */
+  .credit{
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .credit:last-child{ border-bottom:none; }
+  .credit.has-photo{
+    display:flex;
+    gap: 20px;
+  }
+  .credit-poster{
+    flex-shrink:0;
+    width: 96px;
+    height: 132px;
+    background: #1a1611;
+    border: 1px solid rgba(200,153,44,0.3);
+    overflow:hidden;
+    position:relative;
+  }
+  .credit-poster img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+  }
+  .credit-poster::after{
+    content: "";
+    position:absolute; inset:0;
+    box-shadow: inset 0 0 14px rgba(0,0,0,0.6);
+    pointer-events:none;
+  }
+  .credit-body{ flex:1; min-width:0; }
+  .credit-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    flex-wrap: wrap; gap: 8px 16px;
+  }
+  .credit-title{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+  }
+  .credit-year{
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 0.05em;
+  }
+  .credit-role{
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+  .credit-desc{
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--paper-dim);
+    line-height: 1.75;
+  }
+  .status-tag{
+    font-family:'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid rgba(126,42,36,0.5);
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 8px;
+  }
+
+  /* ---- Two-column meta section (education/languages/software) ---- */
+  .meta-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .meta-block h3{
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .meta-block .line{
+    font-size: 14px;
+    color: var(--paper);
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .meta-block .line .lvl{
+    color: var(--gold-dim);
+    font-size: 12px;
+  }
+
+  .education-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+  .education-sub{
+    font-size: 13px;
+    color: var(--paper-dim);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* ---- Focus / footer ---- */
+  .focus-box{
+    margin-top: 64px;
+    border: 1px solid rgba(200,153,44,0.3);
+    background: linear-gradient(180deg, rgba(200,153,44,0.06), transparent);
+    padding: 28px 26px;
+    position: relative;
+  }
+  .focus-box::before{
+    content: "FADE IN:";
+    position: absolute;
+    top: -11px; left: 24px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family:'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+  }
+  .focus-box p{
+    margin:0;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--paper);
+  }
+
+  footer{
+    margin-top: 70px;
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  footer .end{
+    color: var(--gold-dim);
+    margin-top: 6px;
+  }
+
+  @media (max-width: 640px){
+    .frame{ padding: 0 24px 90px; }
+    .skills-grid{ grid-template-columns: 1fr; }
+    .meta-grid{ grid-template-columns: 1fr; }
+    .titlecard{ padding-top: 64px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .scene{ animation: rise 0.6s ease both; }
+    .scene:nth-of-type(2){ animation-delay: 0.05s; }
+    .scene:nth-of-type(3){ animation-delay: 0.1s; }
+    .scene:nth-of-type(4){ animation-delay: 0.15s; }
+    .scene:nth-of-type(5){ animation-delay: 0.2s; }
+  }
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sprockets" style="left:0;"></div>
+<div class="sprockets" style="right:0;"></div>
+
+<div class="frame">
+
+  <div class="titlecard">
+    <img class="headshot" src="images/headshot.jpg" alt="Balaji Veeraplendra">
+    <div class="eyebrow">A Film By</div>
+    <h1 class="title">BALAJI<br>VEERAPLENDRA</h1>
+    <div class="role-line">Writer <span>·</span> Director <span>·</span> Storyteller</div>
+    <p class="logline">An aspiring filmmaker with a desire to tell my stories to the world.</p>
+    <div class="contact-strip">
+      <a href="mailto:balaji.sainma@gmail.com">balaji.sainma@gmail.com</a>
+      <span class="sep">/</span>
+      <a href="tel:+919517725999">+91 95177 25999</a>
+      <span class="sep">/</span>
+      Hyderabad
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="slug"><span class="num">01</span> INT. ABOUT — CONTINUOUS</div>
+    <p class="body-text">I write the script, block the shot, run sound, and sit in the edit — because on a zero-budget set, that's the only way the story survives to screen. Three projects in, the goal hasn't changed: tell stories rooted in Telugu voice and place, and earn a seat in a real writers' room or on a real set.</p>
+  </div>
+
+  <div class="scene">
+    <div class="slug"><span class="num">02</span> EXT. SKILLS — DAY</div>
+    <div class="skills-grid">
+      <div class="skill-item">Screenplay Writing</div>
+      <div class="skill-item">Storytelling</div>
+      <div class="skill-item">Editing</div>
+      <div class="skill-item">Poster Design</div>
+      <div class="skill-item">Sync Sound & Boom Operation</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="slug"><span class="num">03</span> INT. FILMOGRAPHY — CONTINUOUS</div>
+
+    <div class="credit has-photo">
+      <div class="credit-poster">
+        <img src="images/malik-poster.jpg" alt="MALIK poster" loading="lazy">
+      </div>
+      <div class="credit-body">
+        <div class="credit-head">
+          <span class="credit-title">MALIK <span style="font-size:16px; color:var(--muted);">|| కలియుగ కౌరవపాండవీయం ||</span></span>
+          <span class="credit-year">2022</span>
+        </div>
+        <div class="credit-role">Writer · Director</div>
+        <p class="credit-desc">A zero-budget short built entirely solo — script to sound to final cut. First proof that a story doesn't need a budget to need to be told.</p>
+      </div>
+    </div>
+
+    <div class="credit has-photo">
+      <div class="credit-poster">
+        <img src="images/nisivarnoshnudhakamu-poster.jpg" alt="Nisivarnoshnudhakamu poster" loading="lazy">
+      </div>
+      <div class="credit-body">
+        <div class="credit-head">
+          <span class="credit-title">Nisivarnoshnudhakamu</span>
+          <span class="credit-year">2026</span>
+        </div>
+        <div class="credit-role">Writer · Editor · Director</div>
+        <p class="credit-desc">Written, shot, and edited in a single 24-hour contest window in Hyderabad — a sprint that forced fast instincts under a hard deadline.</p>
+      </div>
+    </div>
+
+    <div class="credit has-photo">
+      <div class="credit-poster">
+        <img src="images/vegam-shakatam-poster.jpg" alt="Vegam Shakatam poster" loading="lazy">
+      </div>
+      <div class="credit-body">
+        <div class="credit-head">
+          <span class="credit-title">Vegam Shakatam <span class="status-tag">In Progress</span></span>
+          <span class="credit-year">2026</span>
+        </div>
+        <div class="credit-role">Writer · Creator · Director</div>
+        <p class="credit-desc">Built from a blank page up — writing and directing while also casting, producing, and running the line. Currently in production.</p>
+      </div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-head">
+        <span class="credit-title">College Projects</span>
+      </div>
+      <div class="credit-role">Actor</div>
+      <p class="credit-desc">Stepped in front of the camera on college shorts — the best way to learn what a director is really asking an actor for.</p>
+    </div>
+
+    <div class="credit">
+      <div class="credit-head">
+        <span class="credit-title">PVCU</span>
+      </div>
+      <div class="credit-role">Writer</div>
+      <p class="credit-desc">Short-term writing stint — early reps in developing material for someone else's production.</p>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="slug"><span class="num">04</span> INT. EDUCATION — DAY</div>
+    <div class="education-title">Annapurna College of Film and Media</div>
+    <div class="education-sub">Direction and Storytelling — Ex-Annapurna student in Direction and Storytelling.</div>
+  </div>
+
+  <div class="scene">
+    <div class="slug"><span class="num">05</span> EXT. LANGUAGES & SOFTWARE — DAY</div>
+    <div class="meta-grid">
+      <div class="meta-block">
+        <h3>Languages</h3>
+        <div class="line">Telugu <span class="lvl">— Native</span></div>
+        <div class="line">English <span class="lvl">— Fluent</span></div>
+        <div class="line">Kannada <span class="lvl">— Conversational</span></div>
+      </div>
+      <div class="meta-block">
+        <h3>Known Software</h3>
+        <div class="line">Kit Scenarist</div>
+        <div class="line">Final Cut Pro</div>
+        <div class="line">Celtx</div>
+        <div class="line">Photoshop <span class="lvl">— Beginner</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="focus-box">
+    <p>Writing original scripts on spec and building a directing career one short at a time. Actively seeking an Assistant Director role — ready to trade the solo-crew grind for real set experience and grow inside the industry.</p>
+  </div>
+
+  <footer>
+    <div>Balaji Veeraplendra — Hyderabad</div>
+    <div class="end">CUT TO BLACK.</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
